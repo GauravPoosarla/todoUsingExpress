@@ -1,7 +1,7 @@
 const db = require('../database/models');
 
 exports.getAllTasks = async () => {
-  const result = await db.Tasks.findAll();
+  const result = await db.Tasks.findAll(); // Tasks here is the name of the model
   return result;
 }
 
