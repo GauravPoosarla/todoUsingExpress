@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = require('./routes/taskRoutes');
 const login = require('./middlewares/authentication');
+
 const app = express();
 
 app.use(express.json());

@@ -2,7 +2,7 @@ const axios = require('axios');
 
 exports.authenticateUser = async (req, res, next) => {
   const token = req.header('token');
-  if (token) {
+  try{
     const result = await axios.post('http://localhost:8000/validate', {}, {
       headers: {
         token
@@ -14,7 +14,7 @@ exports.authenticateUser = async (req, res, next) => {
     
     next();
   }
-  else {
-    res.status(401).json({ message: 'Invalid Credentials' });
+  catch(err) {
+    res.status(401).send({error: err.message});
   }
 }
