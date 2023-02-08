@@ -6,30 +6,54 @@ exports.getHomePage = (req, res) => {
 };
 
 exports.getAlltasks = async (req, res) => {
-  const result = await services.getAllTasks();
-  res.json({data: result});
+  try {
+    const result = await services.getAllTasks();
+    res.json({data: result});
+  } catch (err) {
+    res.status(500).json({message: err.message});
+  }  
 };
 
 exports.getTaskById = async (req, res) => {
-  const id = req.params.id;
-  const result = await services.getTaskById(id);
-  res.json({result});
+  try {
+    const id = req.params.id;
+    const result = await services.getTaskById(id);
+    res.json({result});
+  }
+  catch (err) {
+    res.status(500).json({message: err.message});
+  }
 };
 
 exports.postTask = async (req, res) => { 
-  let task = req.body;
-  task['isCompleted'] = false;
-  const result = await services.postTask(task);
-  res.send(result);
+  try {
+    let task = req.body;
+    task['isCompleted'] = false;
+    const result = await services.postTask(task);
+    res.send(result);
+  }
+  catch (err) {
+    res.status(500).json({message: err.message});
+  }
 };
 
 exports.updateTask = async (req, res) => {
-  const id = req.params.id;
-  const result = await services.updateTask(id);
-  res.json({result});
+  try {
+    const id = req.params.id;
+    const result = await services.updateTask(id);
+    res.json({result});
+  }
+  catch (err) {
+    res.status(500).json({message: err.message});
+  }
 };
 
 exports.deleteCompletedTasks = async (req, res) => {
-  await services.deleteCompletedTasks();
-  res.json({message: 'All completed tasks deleted'});
+  try {
+    await services.deleteCompletedTasks();
+    res.json({message: 'All completed tasks deleted'});
+  }
+  catch (err) {
+    res.status(500).json({message: err.message});
+  }
 };
