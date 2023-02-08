@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 exports.authenticateUser = async (req, res, next) => {
-  const token = req.get('token');
+  const token = req.header('token');
   if (token) {
     const result = await axios.post('http://localhost:8000/validate', {}, {
       headers: {
